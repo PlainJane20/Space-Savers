@@ -26,7 +26,7 @@ With the amount of photos people take with their cameras/phones, and image file 
 ![X5NY](https://user-images.githubusercontent.com/72238771/112111353-51826f00-8b71-11eb-9358-e21b55403f82.gif) 
 
 ### Data Analytics Team:
-* [Robert Smith ](https://github.com/Robsmith95): Geo Mapping, Category Machine Learning, Presentation Construction, Logo/ graphic creation
-* [Lana Akimova](https://github.com/lanakimova): Photo upload, Similarities and Deleting, Meta Extraction
-* [Maggie Arellano](https://github.com/marellano22): Analysis, Deployment 
-* [Navi Sohi](https://github.com/PlainJane20): Design (HTML, CSS), Github Manager
+* [Robert Smith ](https://github.com/Robsmith95): `Geo Mapping`, `Category Machine Learning`, `Presentation Construction`, `Logo/ graphic creation`
+* [Lana Akimova](https://github.com/lanakimova): `Photo upload`, `Similarities and Deleting`, `Meta Extraction`
+* [Maggie Arellano](https://github.com/marellano22): `Analysis`, `Deployment`
+* [Navi Sohi](https://github.com/PlainJane20): `Design (HTML, CSS, PHP, Bootstrap)`, `Github Manager`
