@@ -1,6 +1,6 @@
 # Space Savers
 
-![X5NY](https://user-images.githubusercontent.com/72238771/112111353-51826f00-8b71-11eb-9358-e21b55403f82.gif) ![vaccuum gif](https://user-images.githubusercontent.com/72238771/112172959-63383680-8bb2-11eb-85b7-7f71efc4aacb.gif)
+![X5NY](https://user-images.githubusercontent.com/72238771/112111353-51826f00-8b71-11eb-9358-e21b55403f82.gif) 
 
 Background
 Since the digital camera was invented, people stop to choose a perfect location, pose, frame to make a photo. Digital cameras, especially phone cameras, give us the ability to take as much photo as we can or want. 
