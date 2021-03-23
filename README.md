@@ -1,6 +1,6 @@
 # Space Savers
 
-![X5NY](https://user-images.githubusercontent.com/72238771/112111353-51826f00-8b71-11eb-9358-e21b55403f82.gif) 
+![astronaut-pointing-giphy](https://user-images.githubusercontent.com/72238771/112181239-7c90b100-8bb9-11eb-996c-e006daae452f.gif)
 
 Background
 Since the digital camera was invented, people stop to choose a perfect location, pose, frame to make a photo. Digital cameras, especially phone cameras, give us the ability to take as much photo as we can or want. 
@@ -28,7 +28,7 @@ Google API ???
 
 Data sets to use
 List all possible databases you’ll use
-
+![X5NY](https://user-images.githubusercontent.com/72238771/112111353-51826f00-8b71-11eb-9358-e21b55403f82.gif) 
 Tasks Breakdown
 Lana: Photo upload, Similarities and deleting, Meta Extraction
 Navi: Design (HTML, CSS), github manager
