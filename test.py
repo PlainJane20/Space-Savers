@@ -22,16 +22,17 @@ def getFileInfo(path_to_folder):
                 date_and_time  = ''
                 madeBy = ''
                 model = ''
-                with io.open(file_path, 'rb') as file:
-                    image = Image.open(file)
-                    exifdata = image.getexif()
+                # with io.open(file_path, 'rb') as file:
+                image = Image.open(file_path)
+                exifdata = image.getexif()
 
-                    for tag_id in exifdata:
-                        tag = TAGS.get(tag_id, tag_id)
-                        data = exifdata.get(tag_id)              
-                        if tag == 'DateTimeOriginal': date_and_time = data                        
-                        if tag == "Make": madeBy = data
-                        if tag == 'Model': model = data
+                for tag_id in exifdata:
+                    tag = TAGS.get(tag_id, tag_id)
+                    data = exifdata.get(tag_id)
+                    # if isinstance(data, bytes): data = data.decode()              
+                    if tag == 'DateTimeOriginal': date_and_time = data                        
+                    if tag == "Make": madeBy = data
+                    if tag == 'Model': model = data
 
 
                 fileInfo.append({"file_id": file_id, "file_path": file_path, "file_bytes_size": file_size
@@ -40,8 +41,8 @@ def getFileInfo(path_to_folder):
         
     except FileNotFoundError:
         return "Folder not found"
-    except UnicodeDecodeError:
-        return "'utf-8' codec can't decode byte 0xf4 in position 39: invalid continuation byte"
+    # except UnicodeDecodeError:
+        # return "'utf-8' codec can't decode byte 0xf4 in position 39: invalid continuation byte"
 
     
 
