@@ -80,7 +80,7 @@ def getFileInfo(path_to_folder):
 
 
                 fileInfo.append({"file_id": file_id, "file_path": file_path, "file_bytes_size": file_size
-                                , "Date": date, "Time": time
+                                , "Date": date, "Time": time, "lensType": lens
                                 , 'madeBy': madeBy, 'model': model, 'coordinates': coordinates})
         return fileInfo
         
