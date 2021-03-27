@@ -1,8 +1,43 @@
 from PIL import Image
-from PIL.ExifTags import TAGS
+from PIL.ExifTags import GPSTAGS, TAGS
 import json, os
 import io
 
+
+def getLatLong(path_to_file):
+    latitude = ""
+    longtitude = ""
+    with io.open(path_to_file, 'rb') as file:
+        image = Image.open(file)
+        exifdata = image.getexif()
+
+        for tag_id in exifdata:
+            tag = TAGS.get(tag_id, tag_id)
+            data = exifdata.get(tag_id)     
+
+            if tag == 'GPSInfo':
+                for key in data.keys():
+                    name = GPSTAGS.get(key, key)
+                
+                    if name == 'GPSLatitudeRef':
+                        lat_ref = data.get(key)
+                    if name == 'GPSLatitude':
+                        lat = data.get(key)
+                        lat = float(lat[0] + (lat[1] / 60) + (lat[2] / 3600))
+                        if lat_ref == 'N': latitude = f'{lat}'
+                        else: latitude = f'-{lat}'
+                        
+                    if name == 'GPSLongitudeRef':
+                        long_ref = data.get(key)
+                    if name == 'GPSLongitude':
+                        longt = data.get(key)
+                        longt = float(longt[0] + (longt[1] / 60) + (longt[2] / 3600))
+                        if long_ref == "E": longtitude = f'{longt}'
+                        else: longtitude = f'-{longt}'
+
+    return([latitude, longtitude])
+    
+    
 def getFileInfo(path_to_folder):
     # get the list of files in given directory
     
@@ -22,6 +57,7 @@ def getFileInfo(path_to_folder):
                 date_and_time  = ''
                 madeBy = ''
                 model = ''
+                coordinates = []
                 with io.open(file_path, 'rb') as file:
                     image = Image.open(file)
                     exifdata = image.getexif()
@@ -32,18 +68,24 @@ def getFileInfo(path_to_folder):
                         if tag == 'DateTimeOriginal': date_and_time = data                        
                         if tag == "Make": madeBy = data
                         if tag == 'Model': model = data
+                        if tag == "GPSInfo": coordinates = getLatLong(file_path)
 
 
                 fileInfo.append({"file_id": file_id, "file_path": file_path, "file_bytes_size": file_size
-                                , "Date": date_and_time, 'madeBy': madeBy, 'model': model})
+                                , "Date": date_and_time, 'madeBy': madeBy, 'model': model, 'coordinates': coordinates})
         return fileInfo
         
     except FileNotFoundError:
         return "Folder not found"
-    except UnicodeDecodeError:
-        return "'utf-8' codec can't decode byte 0xf4 in position 39: invalid continuation byte"
 
+
+# SHOUKD BE MOVED TO APP>PY
+def getUserpath(path_to_folder):
+    if os.path.exists("filesInfo.json"):
+        os.remove("filesInfo.json")
     
+    with open('filesInfo.json', 'w') as out:
+        json.dump(getFileInfo(path_to_folder), out)
 
 
-print(getFileInfo("/Users/lana/DataClass/SpaceCleaner/Resources/temp_img"))
+getUserpath("/Users/lana/DataClass/SpaceCleaner/Resources/temp_img")
