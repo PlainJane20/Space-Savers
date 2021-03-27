@@ -54,10 +54,13 @@ def getFileInfo(path_to_folder):
                 file_id = fileList[file]
                 file_path = f"{path_to_folder}/{fileList[file]}"
                 file_size = os.path.getsize(f"{path_to_folder}/{fileList[file]}")
-                date_and_time  = ''
+                date  = ''
+                time = ''
                 madeBy = ''
                 model = ''
+                lens = ''
                 coordinates = []
+
                 with io.open(file_path, 'rb') as file:
                     image = Image.open(file)
                     exifdata = image.getexif()
@@ -65,14 +68,20 @@ def getFileInfo(path_to_folder):
                     for tag_id in exifdata:
                         tag = TAGS.get(tag_id, tag_id)
                         data = exifdata.get(tag_id)              
-                        if tag == 'DateTimeOriginal': date_and_time = data                        
+                        if tag == 'DateTimeOriginal': 
+                            date_and_time = data .split(" ")         
+                            date = date_and_time[0]
+                            time = date_and_time[1]
+                                           
                         if tag == "Make": madeBy = data
                         if tag == 'Model': model = data
+                        if tag == 'LensModel': lens = data
                         if tag == "GPSInfo": coordinates = getLatLong(file_path)
 
 
                 fileInfo.append({"file_id": file_id, "file_path": file_path, "file_bytes_size": file_size
-                                , "Date": date_and_time, 'madeBy': madeBy, 'model': model, 'coordinates': coordinates})
+                                , "Date": date, "Time": time
+                                , 'madeBy': madeBy, 'model': model, 'coordinates': coordinates})
         return fileInfo
         
     except FileNotFoundError:
