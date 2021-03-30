@@ -51,7 +51,31 @@
                     <div class="cd-full-width">
                         <div class="container-fluid js-tm-page-content tm-page-pad" data-page-no="1">
                             <div class="row">
-                                    <div class="tm-3-col-container">                                  
+                                    <div class="tm-3-col-container"> 
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+      <h1>Upload an image</h1>
+      <hr>
+      <form action="/index.html" method="POST" enctype="multipart/form-data">
+
+        <div class="form-group">
+          <label>Select image</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" name="image" id="image">
+            <label class="custom-file-label" for="image">Select image...</label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Upload</button>
+
+      </form>
+
+    </div>
+  </div>
+</div>                          
                                 </div>                                 
                             </div>
                         </div>                                                    
@@ -236,12 +260,10 @@
                 if($(window).width() >= 992) { offset = 120; }
                 else if($(window).width() < 480) { offset = 40; }
                
-                // Page height
                 var totalPageHeight = 15 + $('.cd-slider-nav').height()
                                         + pageContentHeight + offset
                                         + $('.tm-footer').height();
 
-                // Adjust layout based on page height and window 
                 if(totalPageHeight > $(window).height()) 
                 {
                     $('.cd-hero-slider').addClass('small-screen');
@@ -256,10 +278,8 @@
 
             $(window).load(function(){
 
-                adjustHeightOfPage(1); // Adjust page height
+                adjustHeightOfPage(1); 
 
-                /* Collapse menu after click 
-                -----------------------------------------*/
                 $('#tmNavbar a').click(function(){
                     $('#tmNavbar').collapse('hide');
 
@@ -279,8 +299,6 @@
                            
             });
 
-            /* Gmap
-            ------------------------------------------------*/
             var map = '';
             var center;
 
