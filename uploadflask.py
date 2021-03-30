@@ -1,16 +1,20 @@
 import os
-from app import app 
 from flask import Flask, request, redirect, url_for, render_template, jsonify, make_response
 from datetime import datetime
+# from app import app 
 
-app.config["IMAGE_UPLOADS"] = "img/Uploads":
+app = Flask(__name__)
 
-@app.route("/", methods=["GET", "POST"]
+@app.route("/", methods=["GET", "POST"])
 def upload_image():
     if request.method == "POST":
+        print(request.files["file"])
         if request.files: 
             image = request.files['image']
             image.save(os.path.join(app.config["IMAGE_UPLOADS"]. image.filename))
-            print(image saved)
+            print("image saved")
             return redirect(request.url)
-    return render_template("/index.html")
+    return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
