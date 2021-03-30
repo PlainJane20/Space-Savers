@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/Users/lana/opt/anaconda3/envs/PythonAdv/bin/python"
+    "python.pythonPath": "/Users/lana/opt/anaconda3/envs/PythonAdv/bin/python",
+    "git.ignoreLimitWarning": true
 }
