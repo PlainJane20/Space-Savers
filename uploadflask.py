@@ -5,7 +5,7 @@ from datetime import datetime
 
 app.config["IMAGE_UPLOADS"] = "img/Uploads":
 
-@app.route("/upload-image", methods=["GET", "POST"]
+@app.route("/", methods=["GET", "POST"]
 def upload_image():
     if request.method == "POST":
         if request.files: 
@@ -13,4 +13,4 @@ def upload_image():
             image.save(os.path.join(app.config["IMAGE_UPLOADS"]. image.filename))
             print(image saved)
             return redirect(request.url)
-    return render_template("Space-Savers/index.html")
+    return render_template("/index.html")
