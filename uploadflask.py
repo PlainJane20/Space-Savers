@@ -8,8 +8,8 @@ from werkzeug.utils import secure_filename
 # import 
 
 app = Flask(__name__)
-#app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
-app.config["IMAGE_UPLOADS"] = "/tmp/"
+app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
+
 path = os.getcwd()
 
 ####################################
@@ -26,7 +26,6 @@ def upload_image():
             files = request.files.getlist("image[]")
             for image in files:
                 print(image.filename)
-                mydir = os.path.dirname(__file__)
                 image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
                 print("image saved")
                 message = "File(s) successfully loaded"
