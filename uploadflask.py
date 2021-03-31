@@ -18,6 +18,7 @@ path = os.getcwd()
 
 @app.route("/", methods=["GET", "POST"])
 def upload_image():
+    message = ""
     if request.method == "POST":
         files = request.files.getlist("image[]")
         print(files)
@@ -27,13 +28,14 @@ def upload_image():
                 print(image.filename)
                 image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
                 print("image saved")
-            return redirect(request.url)
+                message = "File(s) successfully loaded"
+            # return redirect(request.url)
             # image = request.files('image')
             # print(image.filename)
             # image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
             # print("image saved")
             # return redirect(request.url)
-    return render_template("index.html")
+    return render_template("index.html", message=message)
 
 if __name__ == "__main__":
     app.run(debug=True)
