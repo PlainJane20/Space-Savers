@@ -25,7 +25,8 @@ def upload_image():
             files = request.files.getlist("image[]")
             for image in files:
                 print(image.filename)
-                image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+                mydir = os.path.dirname(__file__)
+                image.save(os.path.join(mydir + "/" + app.config["IMAGE_UPLOADS"], image.filename))
                 print("image saved")
             return redirect(request.url)
             # image = request.files('image')
