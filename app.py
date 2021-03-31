@@ -20,10 +20,11 @@ def getUserpath(path_to_folder):
     with open('filesInfo.json', 'w') as out:
         json.dump(getFileInfo(path_to_folder), out)
 
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 
 
 
 
-getUserpath("/Users/lana/DataClass/SpaceCleaner/Resources/temp_img")
