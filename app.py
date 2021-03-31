@@ -13,6 +13,12 @@ def home():
     
     return render_template('index.html')
 
+def getUserpath(path_to_folder):
+    if os.path.exists("filesInfo.json"):
+        os.remove("filesInfo.json")
+    
+    with open('filesInfo.json', 'w') as out:
+        json.dump(getFileInfo(path_to_folder), out)
 
 
 

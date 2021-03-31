@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Space Savers</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">  
-    <link rel="stylesheet" href="fontawesome5.0/css/fontawesome.min.css">                
-    <link rel="stylesheet" href="css/bootstrap.min.css">                                      
-    <link rel="stylesheet" href="css/hero-slider-style.css">                              
-    <link rel="stylesheet" href="css/magnific-popup.css">                                 
-    <link rel="stylesheet" href="css/indexstyle.css">                                   
+    <link rel="stylesheet" href="static/fontawesome5.0/css/fontawesome.min.css">                
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">                                      
+    <link rel="stylesheet" href="static/css/hero-slider-style.css">                              
+    <link rel="stylesheet" href="static/css/magnific-popup.css">                                 
+    <link rel="stylesheet" href="static/css/indexstyle.css">                                   
 </head>
 
     <body>
@@ -51,7 +51,28 @@
                     <div class="cd-full-width">
                         <div class="container-fluid js-tm-page-content tm-page-pad" data-page-no="1">
                             <div class="row">
-                                    <div class="tm-3-col-container">                                  
+                                    <div class="tm-3-col-container"> 
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+      <h1>Upload an Image</h1>
+      <hr>
+      <form action="/" method="POST" enctype="multipart/form-data">
+
+        <div class="form-group">
+          <label>Select an Image</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" name="image" id="image">
+            <label class="custom-file-label" for="image">Select image...</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </form>
+    </div>
+  </div>
+</div>                          
                                 </div>                                 
                             </div>
                         </div>                                                    
@@ -113,13 +134,13 @@
                                                 <title>Team Space Savers</title>
                                                 <meta content="width=device-width, initial-scale=1.0" name="viewport">
                                         
-                                                <link href="img/favicon.ico" rel="icon">
+                                                <link href="static/img/favicon.ico" rel="icon">
                                         
                                                 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
                                         
                                                 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
                                         
-                                                <link href="css/teamstyle.css" rel="stylesheet">
+                                                <link href="static/css/teamstyle.css" rel="stylesheet">
                                             </head>
                                             <body>  
                                                 <div class="container">
@@ -130,7 +151,7 @@
                                                         <div class="column">
                                                             <div class="team-3">
                                                                 <div class="team-img">
-                                                                    <img src="img/NS.jpg" alt="Navi">
+                                                                    <img src="static/img/NS.jpg" alt="Navi">
                                                                     <div class="team-social">
                                                                         <a class="social-linkedin" href="https://www.linkedin.com/in/navisohi/"><i class="fab fa-linkedin-in"></i></a>
                                                                         <a class="social-github" href="https://github.com/PlainJane20"><i class="fab fa-github"></i></a>
@@ -148,7 +169,7 @@
                                                         <div class="column">
                                                             <div class="team-3">
                                                                 <div class="team-img">
-                                                                    <img src="img/Lana.jpg" alt="Svetlana Akimova">
+                                                                    <img src="static/img/Lana.jpg" alt="Svetlana Akimova">
                                                                     <div class="team-social">
                                                                         <a class="social-linkedin" href="https://www.linkedin.com/in/lana-akimova/"><i class="fab fa-linkedin-in"></i></a>
                                                                         <a class="social-github" href="https://github.com/lanakimova"><i class="fab fa-github"></i></a>
@@ -166,7 +187,7 @@
                                                         <div class="column">
                                                             <div class="team-3">
                                                                 <div class="team-img">
-                                                                    <img src="img/RS.jpg" alt="Robert Smith">
+                                                                    <img src="static/img/RS.jpg" alt="Robert Smith">
                                                                     <div class="team-social">
                                                                         <a class="social-linkedin" href="linkedin.com/in/robert-smith-3b55a716b"><i class="fab fa-linkedin-in"></i></a>
                                                                         <a class="social-github" href="https://github.com/Robsmith95"><i class="fab fa-github"></i></a>
@@ -184,7 +205,7 @@
                                                         <div class="column">
                                                             <div class="team-3">
                                                                 <div class="team-img">
-                                                                    <img src="img/MA.jpg" alt="Maggie Arellano">
+                                                                    <img src="static/img/MA.jpg" alt="Maggie Arellano">
                                                                     <div class="team-social">
                                                                         <a class="social-linkedin" href="https://www.linkedin.com/in/navisohi/"><i class="fab fa-linkedin-in"></i></a>
                                                                         <a class="social-github" href="https://github.com/marellano22"><i class="fab fa-github"></i></a>
@@ -211,13 +232,19 @@
         </div>
         
         <!-- Load JS files -->
-        <script src="js/jquery.js"></script>        
+        <script src="static/js/jquery.js"></script>        
         <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script> 
+<<<<<<< HEAD:index.html
         <script src="js/bootstrap.min.js"></script>           
         <script src="js/hero-slider-main.js"></script>          
         <script src="js/jquery.magnific-popup.min.js"></script> 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
 
+=======
+        <script src="static/js/bootstrap.min.js"></script>           
+        <script src="static/js/hero-slider-main.js"></script>          
+        <script src="static/js/jquery.magnific-popup.min.js"></script> 
+>>>>>>> origin/website:templates/index.html
         
         <script>
 
@@ -238,12 +265,10 @@
                 if($(window).width() >= 992) { offset = 120; }
                 else if($(window).width() < 480) { offset = 40; }
                
-                // Page height
                 var totalPageHeight = 15 + $('.cd-slider-nav').height()
                                         + pageContentHeight + offset
                                         + $('.tm-footer').height();
 
-                // Adjust layout based on page height and window 
                 if(totalPageHeight > $(window).height()) 
                 {
                     $('.cd-hero-slider').addClass('small-screen');
@@ -258,10 +283,8 @@
 
             $(window).load(function(){
 
-                adjustHeightOfPage(1); // Adjust page height
+                adjustHeightOfPage(1); 
 
-                /* Collapse menu after click 
-                -----------------------------------------*/
                 $('#tmNavbar a').click(function(){
                     $('#tmNavbar').collapse('hide');
 
@@ -281,8 +304,6 @@
                            
             });
 
-            /* Gmap
-            ------------------------------------------------*/
             var map = '';
             var center;
 

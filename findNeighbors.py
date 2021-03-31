@@ -7,6 +7,19 @@ import json
 from annoy import AnnoyIndex
 from scipy import spatial
 
+def checkValue(value, dic):
+    response = False
+    for key in dic.keys():
+        values = dic[key]
+        if value not in values:
+            print(f"Value not found: {value}")
+            response = False
+        else:
+            print(f"Value found: {value}")
+            response = True
+            break
+    return response
+
 def cluster():
     start_time = time.time()
 
@@ -16,14 +29,14 @@ def cluster():
 
     file_index_to_file_name = {}
     file_index_to_file_vector = {}
-    file_index_to_product_id = {}
+    # file_index_to_product_id = {}
 
     # config annoy params
     dims = 1792
     n_nearest_neighbors = 20
     trees = 10000
 
-    all_feature_vectors = glob.glob('/Users/lana/DataClass/Space-Savers/Resources/img_vector/*.npz')
+    all_feature_vectors = glob.glob('static/img/img_vectors/*.npz')
 
     t = AnnoyIndex(dims, metric='angular')
 
@@ -46,41 +59,45 @@ def cluster():
     print("Step.1 ANNOY INDEX generation -Finished")
     print("Step.2 - Similarity score calculation - Started")
 
-    named_nearest_neighbors = []
+    # named_nearest_neighbors = []
     similar_files = {}
 
     for i in file_index_to_file_name.keys():
+        
         master_file_name = file_index_to_file_name[i]
         master_vector = file_index_to_file_vector[i]
+        if master_file_name in similar_files.keys():
+            print(f" IN DIC KEY: Master file: {master_file_name} and i= {i} PASSED")
+            continue
+        else:
+            if checkValue(master_file_name, similar_files) == True:
+                print(f"Continue: checkValue = {checkValue(master_file_name, similar_files)}")
+                print(f" IN DIC LIST Master file: {master_file_name} and i= {i} PASSED")
+                continue
+            else:
+                print(f"ELSE: checkValue = {checkValue(master_file_name, similar_files)}")
+                similar_files[master_file_name] = []
+                nearest_neighbors = t.get_nns_by_item(i, n_nearest_neighbors)
 
+                for j in nearest_neighbors:
+                    print(f"        NESTED LOOP Iteration # {j}")
+                    neighbor_file_name = file_index_to_file_name[j]
+                    neighbor_file_vector = file_index_to_file_vector[j]
 
-        nearest_neighbors = t.get_nns_by_item(i, n_nearest_neighbors)
-        for j in nearest_neighbors:
-            # print(j)
-            neighbor_file_name = file_index_to_file_name[j]
-            neighbor_file_vector = file_index_to_file_vector[j]
+                    print(f"        NEIGBOR NAME IS {neighbor_file_name}")
 
-            similarity = 1 - spatial.distance.cosine(master_vector, neighbor_file_vector)
-
-            round_similarity = int((similarity * 10000)) / 10000.0
-            # temp_neighboors = []
-            if round_similarity >= 0.82:
-                named_nearest_neighbors.append( {'similarity': round_similarity, 'master_name': master_file_name, 'neighbor_name': neighbor_file_name})       
+                    similarity = 1 - spatial.distance.cosine(master_vector, neighbor_file_vector)
+                    round_similarity = int((similarity * 10000)) / 10000.0
             
-        print("-"*10)
-        print(f'Similarity index: {i}')
-        print(f'Master Image file name: {file_index_to_file_name[i]}')
-        print(f'Nearest Neighbors: {nearest_neighbors}')
-        print(f'{(time.time() - start_time)/60} minuts passed')
+            
+                    if round_similarity >= 0.85 and neighbor_file_name != master_file_name :
+                        similar_files[master_file_name].append(neighbor_file_name)
 
+        print(f"END: MASTER FILE is {master_file_name}, SIMILAR FILE: {similar_files}")
         print("Step.2 - Similarity score calculation - Finished")
 
-
-    
-    with open('nearest_neighbors.json', 'w') as out:
-        json.dump(named_nearest_neighbors, out)
-
-
+    with open('static/json/similarPhoto.json', 'w') as out:
+        json.dump(similar_files, out)
     print("Step.3 - Data stored in named_nearest_neighbors.json file")
 
     print(similar_files)
