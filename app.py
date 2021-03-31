@@ -18,6 +18,7 @@ path = os.getcwd()
 
 @app.route("/", methods=["GET", "POST"])
 def upload_image():
+    return "test"
     if request.method == "POST":
         files = request.files.getlist("image[]")
         print(files)
