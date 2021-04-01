@@ -25,13 +25,14 @@ def get_image_feature_vectors():
     module = hub.load(module_handle)
 
     for filename in glob.glob('/tmp/*'):
-        print(filename)
-        img = load_img(filename)
-        features = module(img)
-        feature_set = np.squeeze(features)
-        outfile_name = os.path.basename(filename) + ".npz"
-        out_path = os.path.join('/img_vectors/', outfile_name)
-        np.savetxt(out_path, feature_set, delimiter=',')
+        if ".json" not in filename:
+            print(filename)
+            img = load_img(filename)
+            features = module(img)
+            feature_set = np.squeeze(features)
+            outfile_name = os.path.basename(filename) + ".npz"
+            out_path = os.path.join('/img_vectors/', outfile_name)
+            np.savetxt(out_path, feature_set, delimiter=',')
 
 get_image_feature_vectors()
 

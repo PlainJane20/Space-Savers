@@ -6,7 +6,7 @@ from flask import Flask, request, redirect, url_for, render_template, jsonify, m
 from datetime import datetime
 from werkzeug.utils import secure_filename
 
-global app = Flask(__name__)
+app = Flask(__name__)
 
 #app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
 app.config["IMAGE_UPLOADS"] = "/tmp/"
