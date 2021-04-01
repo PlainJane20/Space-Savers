@@ -9,8 +9,8 @@ from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__)
-app.config["IMAGE_UPLOADS"] = "./static/img/uploads/"
-#app.config["IMAGE_UPLOADS"] = "/tmp/"  
+#app.config["IMAGE_UPLOADS"] = "./static/img/uploads/"
+app.config["IMAGE_UPLOADS"] = "/tmp/"  
 path = os.getcwd()
 
 ####################################
