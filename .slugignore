@@ -1,3 +1,4 @@
 .vscode
 *.jpg
 /css
+/templates
