@@ -5,12 +5,10 @@ import os
 from flask import Flask, request, redirect, url_for, render_template, jsonify, make_response
 from datetime import datetime
 from werkzeug.utils import secure_filename
-# import 
-
 
 app = Flask(__name__)
 #app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
-app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
+app.config["IMAGE_UPLOADS"] = "/tmp/"
 path = os.getcwd()
 
 ####################################
@@ -20,6 +18,9 @@ path = os.getcwd()
 @app.route("/", methods=["GET", "POST"])
 def upload_image():
     message = ""
+    total_files =0
+    unique_files =0
+    duplicates =0
     if request.method == "POST":
         files = request.files.getlist("image[]")
         print(files)
@@ -35,7 +36,7 @@ def upload_image():
                 total_files = len(file_info[0]) + len(file_info[1])
                 unique_files = len(file_info[0])
                 duplicates = len(file_info[1])
-    return render_template("index.html", message=message) 
+    return render_template("index.html", message=message, total_files=total_files, unique_files=unique_files, duplicates=duplicates) 
 
 @app.route("/getSimilarPhotos")
 def similarPhotos():
