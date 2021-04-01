@@ -31,10 +31,10 @@ def upload_image():
                 image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
                 print("image saved")
                 message = "File(s) successfully loaded"
-                image.seek(0)
-                image_string = base64.b64encode(image.read())
+                # image.seek(0)
+                # image_string = base64.b64encode(image.read())
 
-                image_string = image_string.decode('utf-8')
+                # image_string = image_string.decode('utf-8')
             # return redirect(request.url)
             # image = request.files('image')
             # print(image.filename)
