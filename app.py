@@ -5,15 +5,15 @@ import os
 from flask import Flask, request, redirect, url_for, render_template, jsonify, make_response
 from datetime import datetime
 from werkzeug.utils import secure_filename
-from config import *
 
 app = Flask(__name__)
 
 #app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
-app.config["IMAGE_UPLOADS"] = dir_config+"/tmp/"
+app.config["IMAGE_UPLOADS"] = "/tmp/"
 
 
 from findNeighbors import *
+from imagePreparation import *
 path = os.getcwd()
 # annoy==1.17.0
 
@@ -46,6 +46,7 @@ def upload_image():
 
 @app.route("/getSimilarPhotos")
 def similarPhotos():
+    get_image_feature_vectors()
     data = cluster()
     unique_files = data.keys()
     duplicates = []

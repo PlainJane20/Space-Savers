@@ -35,6 +35,5 @@ def get_image_feature_vectors():
             out_path = os.path.join('/img_vectors/', outfile_name)
             np.savetxt(out_path, feature_set, delimiter=',')
 
-get_image_feature_vectors()
 
 
