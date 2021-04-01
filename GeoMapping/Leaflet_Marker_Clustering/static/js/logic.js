@@ -31,7 +31,8 @@ console.log(response);
     if (coordinates.length == 2) {
       // Add a new marker to the cluster group and bind a pop-up
       markers.addLayer(L.marker([coordinates[0], coordinates[1]])
-      .bindPopup("<h1>" + element.file_id + "</h1> <hr> <h3>Date: " + element.Date + "</h3>" + "</h1> <hr> <h3>Time: " + element.Time + "</h3>"));
+      .bindPopup("<h1>" + element.file_id + "</h1> <hr> <h3>Date: " + element.Date + "</h3>" + "</h1> <hr> <h3>Time: " + element.Time + "</h3>"
+          + "</h1> <hr> <h3>Taken with a " + element.madeBy + " " + element.model + "</h3>"));
     } 
 
   });
