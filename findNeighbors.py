@@ -96,7 +96,7 @@ def cluster():
         print(f"END: MASTER FILE is {master_file_name}, SIMILAR FILE: {similar_files}")
         print("Step.2 - Similarity score calculation - Finished")
 
-    with open('/json/similarPhoto.json', 'w') as out:
+    with open(app.config["IMAGE_UPLOADS"]+'similarPhoto.json', 'w') as out:
         json.dump(similar_files, out)
     print("Step.3 - Data stored in named_nearest_neighbors.json file")
 

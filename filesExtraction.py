@@ -95,8 +95,8 @@ def getFileInfo(path_to_folder):
 
 # SHOUKD BE MOVED TO APP.PY
 def getUserpath(path_to_folder):
-    if os.path.exists("filesInfo.json"):
-        os.remove("filesInfo.json")
+    if os.path.exists(app.config["IMAGE_UPLOADS"]+"filesInfo.json"):
+        os.remove(app.config["IMAGE_UPLOADS"]+"filesInfo.json")
     
-    with open('/json/filesInfo.json', 'w') as out:
+    with open(app.config["IMAGE_UPLOADS"]+'filesInfo.json', 'w') as out:
         json.dump(getFileInfo(path_to_folder), out)
