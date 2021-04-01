@@ -5,6 +5,7 @@ import os
 from flask import Flask, request, redirect, url_for, render_template, jsonify, make_response
 from datetime import datetime
 from werkzeug.utils import secure_filename
+from findNeighbors import *
 
 app = Flask(__name__)
 #app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
