@@ -3,6 +3,7 @@ import time
 import glob 
 import os
 import json
+from config import *
 
 from annoy import AnnoyIndex
 from scipy import spatial
@@ -96,7 +97,7 @@ def cluster():
         print(f"END: MASTER FILE is {master_file_name}, SIMILAR FILE: {similar_files}")
         print("Step.2 - Similarity score calculation - Finished")
 
-    with open('/tmp/similarPhoto.json', 'w') as out:
+    with open(dir_config+'/tmp/similarPhoto.json', 'w') as out:
         json.dump(similar_files, out)
     print("Step.3 - Data stored in named_nearest_neighbors.json file")
 

@@ -1,1 +1,1 @@
-app.config["IMAGE_UPLOADS"] = "img/Uploads":
+dir_config = "":
