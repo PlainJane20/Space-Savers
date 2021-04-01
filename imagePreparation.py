@@ -1,5 +1,6 @@
 import tensorflow as tf
 import tensorflow_hub as hub
+from config import *
 
 import numpy as np
 
@@ -24,7 +25,7 @@ def get_image_feature_vectors():
     module_handle = "https://tfhub.dev/google/imagenet/mobilenet_v2_140_224/feature_vector/4"
     module = hub.load(module_handle)
 
-    for filename in glob.glob('/tmp/*'):
+    for filename in glob.glob(dir_config+'/tmp/*'):
         if ".json" not in filename:
             print(filename)
             img = load_img(filename)
