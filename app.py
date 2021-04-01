@@ -41,7 +41,7 @@ def upload_image():
             # image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
             # print("image saved")
             # return redirect(request.url)
-    return render_template("index.html", message=message, img = image_string)
+    return render_template("index.html", message=message)
 
 if __name__ == "__main__":
     app.run(debug=True)
