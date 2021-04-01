@@ -60,7 +60,7 @@ def cluster():
     print("Step.1 ANNOY INDEX generation -Finished")
     print("Step.2 - Similarity score calculation - Started")
 
-    # named_nearest_neighbors = []
+    
     similar_files = {}
 
     for i in file_index_to_file_name.keys():
