@@ -11,6 +11,7 @@ app = Flask(__name__)
 #app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
 app.config["IMAGE_UPLOADS"] = "/tmp/"
 path = os.getcwd()
+# annoy==1.17.0
 
 ####################################
 # Flask Routes
