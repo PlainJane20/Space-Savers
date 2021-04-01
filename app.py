@@ -52,7 +52,7 @@ def similarPhotos():
         duplicates.append(len(data[key]))
     print(unique_files)
     print(duplicates)
-    return [unique_files, duplicate]
+    return [unique_files, duplicates]
 
 if __name__ == "__main__":
     app.run(debug=True)
