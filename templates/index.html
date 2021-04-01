@@ -53,32 +53,49 @@
                             <div class="row">
                                     <div class="tm-3-col-container"> 
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-
-      <h1>Upload an Image</h1>
-      <hr>
-      <form action="/" method="POST" enctype="multipart/form-data">
-
-        <div class="form-group">
-          <label>Select an Image</label>
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" name="image" id="image">
-            <label class="custom-file-label" for="image">Select image...</label>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Upload</button>
-      </form>
-    </div>
-  </div>
-</div>                          
-                                </div>                                 
-                            </div>
-                        </div>                                                    
+                                        <div id="wrapper">
+                                            <div id="page-wrapper">
+                                                <div class="row">
+                                                    <div class="container">
+                                                        <div id="identitycard" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                                                            <div class="panel panel-info">
+                                                                <div class="panel-heading">
+                                                                    <div class="panel-title">Select file(s) to upload</div>
+                                                                </div>
+                                                                <div class="panel-body">
+                                        <p>
+                                            {{message}} <br>
+                                            Number of Total Files: {{total_files}} <br>
+                                            Number of Unique Files: {{unique_files}} <br>
+                                            Number of Duplicate Files: {{duplicates}} <br>
+                                            
+                                            
+                                         <!-- {% with messages = get_flashed_messages() %}
+                                           {% if messages %}
+                                          {% for message in messages %}
+                                            <div class="alert alert-success">
+                                             <strong>{{ message }}</strong>
+                                           </div>
+                                          {% endfor %}
+                                           {% endif %}
+                                         {% endwith %} -->
+                                        </p>
+                                                                    <div class="row">
+                                                                    </div>
+                                                                    <div class="row" style="padding: 10px 15px 9px;">
+                                                                        <form method="post" action="/" enctype="multipart/form-data">
+                                                                            <div class="form-group"> 
+                                                                                <div class="row" style="margin-bottom: 20px;">
+                                                                                    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-2"> 
+                                                                                        <input type="file" name="image[]" multiple="true" autocomplete="off" required> 
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row text-center" style="padding-left: 20px;padding-right: 20px;">
+                                             <input type="submit" value="Submit" class="btn btn-lg btn-block btn-success" style="border-radius: 50px;background-color: #35832f;">
+                                            </div>                                                                                                    
                     </div>                    
                 </li>
-                
+    
                 <!-- Travel Map -->
                 <li>                    
                     <div class="cd-full-width">
@@ -191,7 +208,6 @@
                                                                     <div class="team-social">
                                                                         <a class="social-linkedin" href="linkedin.com/in/robert-smith-3b55a716b"><i class="fab fa-linkedin-in"></i></a>
                                                                         <a class="social-github" href="https://github.com/Robsmith95"><i class="fab fa-github"></i></a>
-                                                                        <a class="social-envelope" href=""><i class="fa fa-envelope"></i></a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="team-content">
@@ -205,11 +221,10 @@
                                                         <div class="column">
                                                             <div class="team-3">
                                                                 <div class="team-img">
-                                                                    <img src="static/img/MA.jpg" alt="Maggie Arellano">
+                                                                    <img src="static/img/Maggie.jpg" alt="Maggie Arellano">
                                                                     <div class="team-social">
-                                                                        <a class="social-linkedin" href="https://www.linkedin.com/in/navisohi/"><i class="fab fa-linkedin-in"></i></a>
+                                                                        <a class="social-linkedin" href="https://www.linkedin.com/in/maggie-arellano-92333066/"><i class="fab fa-linkedin-in"></i></a>
                                                                         <a class="social-github" href="https://github.com/marellano22"><i class="fab fa-github"></i></a>
-                                                                        <a class="social-envelope" href=""><i class="fa fa-envelope"></i></a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="team-content">
@@ -228,23 +243,14 @@
             <div id="loader"></div>
             <div class="loader-section section-left"></div>
             <div class="loader-section section-right"></div>
-
         </div>
         
         <!-- Load JS files -->
         <script src="static/js/jquery.js"></script>        
         <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script> 
-<<<<<<< HEAD:index.html
-        <script src="js/bootstrap.min.js"></script>           
-        <script src="js/hero-slider-main.js"></script>          
-        <script src="js/jquery.magnific-popup.min.js"></script> 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
-
-=======
         <script src="static/js/bootstrap.min.js"></script>           
         <script src="static/js/hero-slider-main.js"></script>          
         <script src="static/js/jquery.magnific-popup.min.js"></script> 
->>>>>>> origin/website:templates/index.html
         
         <script>
 
@@ -340,8 +346,7 @@
                 loadGoogleMap(); 
             });
 
-        </script>     
-        <script src='test_js.js'></script>       
+        </script>            
 
 </body>
 </html>

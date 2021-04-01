@@ -98,7 +98,6 @@ def cluster():
 
     with open('static/json/similarPhoto.json', 'w') as out:
         json.dump(similar_files, out)
-    print("Step.3 - Data stored in named_nearest_neighbors.json file")
+    print("Step.3 - Data stored in similar_files.json file")
 
-    print(similar_files)
-cluster()
+    return similar_files

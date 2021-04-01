@@ -1,30 +1,61 @@
-from filesExtraction import getFileInfo
-from flask import Flask, render_template, redirect, jsonify
-from flask.json import tojson_filter
-from PIL import Image
-from PIL.ExifTags import TAGS
-import json, os
+####################################
+# Flask Setup
+####################################
+import os
+from flask import Flask, request, redirect, url_for, render_template, jsonify, make_response
+from datetime import datetime
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    
-    
-    return render_template('index.html')
-
-def getUserpath(path_to_folder):
-    if os.path.exists("filesInfo.json"):
-        os.remove("filesInfo.json")
-    
-    with open('filesInfo.json', 'w') as out:
-        json.dump(getFileInfo(path_to_folder), out)
+#app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
+app.config["IMAGE_UPLOADS"] = "/tmp/"
 
 
+from findNeighbors import *
+from imagePreparation import *
+path = os.getcwd()
+# annoy==1.17.0
+
+####################################
+# Flask Routes
+####################################
+
+@app.route("/", methods=["GET", "POST"])
+def upload_image():
+    message = ""
+    total_files =0
+    unique_files =0
+    duplicates =0
+    if request.method == "POST":
+        files = request.files.getlist("image[]")
+        print(files)
+        if request.files:
+            files = request.files.getlist("image[]")
+            for image in files:
+                print(image.filename)
+                mydir = os.path.dirname(__file__)
+                image.save(os.path.join('static/img/Uploads/', image.filename))
+                print("image saved")
+                message = "Files summary information"
+        file_info = similarPhotos()
+        total_files = len(file_info[0]) + len(file_info[1])
+        unique_files = len(file_info[0])
+        duplicates = len(file_info[1])
+    return render_template("index.html", message=message, total_files=total_files, unique_files=unique_files, duplicates=duplicates) 
+
+@app.route("/getSimilarPhotos")
+def similarPhotos():
+    get_image_feature_vectors()
+    
+    data = cluster()
+    unique_files = data.keys()
+    duplicates = []
+    for key in data.keys():
+        duplicates.append(len(data[key]))
+    print(unique_files)
+    print(duplicates)
+    return [unique_files, duplicates]
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-
