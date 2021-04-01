@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 #app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
-app.config["IMAGE_UPLOADS"] = "/tmp/"  
+app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
 path = os.getcwd()
 
 ####################################
@@ -30,14 +30,23 @@ def upload_image():
                 mydir = os.path.dirname(__file__)
                 image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
                 print("image saved")
-                message = "File(s) successfully loaded"
-            # return redirect(request.url)
-            # image = request.files('image')
-            # print(image.filename)
-            # image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
-            # print("image saved")
-            # return redirect(request.url)
-    return render_template("index.html", message=message)
+                message = "Number of Total Files: Number of Unique Files: Number of Duplicate Files"
+                file_info = similarPhotos()
+                total_files = len(file_info[0]) + len(file_info[1])
+                unique_files = len(file_info[0])
+                duplicates = len(file_info[1])
+    return render_template("index.html", message=message) 
+
+@app.route("/getSimilarPhotos")
+def similarPhotos():
+    data = cluster()
+    unique_files = data.keys()
+    duplicates = []
+    for key in data.keys():
+        duplicates.append(len(data[key]))
+    print(unique_files)
+    print(duplicates)
+    return [unique_files, duplicate]
 
 if __name__ == "__main__":
     app.run(debug=True)
