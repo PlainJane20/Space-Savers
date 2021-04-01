@@ -1,1 +1,1 @@
-dir_config = "work":
+dir_config = "work"

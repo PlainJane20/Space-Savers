@@ -47,6 +47,7 @@ def upload_image():
 @app.route("/getSimilarPhotos")
 def similarPhotos():
     get_image_feature_vectors()
+    
     data = cluster()
     unique_files = data.keys()
     duplicates = []
