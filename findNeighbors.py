@@ -99,6 +99,6 @@ def cluster():
 
     with open(dir_config+'similarPhoto.json', 'w') as out:
         json.dump(similar_files, out)
-    print("Step.3 - Data stored in named_nearest_neighbors.json file")
+    print("Step.3 - Data stored in similarPhoto.json file")
     return similar_files
     
