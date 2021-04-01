@@ -9,8 +9,8 @@ from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__)
-#app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
-app.config["IMAGE_UPLOADS"] = "/tmp/"  
+app.config["IMAGE_UPLOADS"] = "./static/img/uploads/"
+#app.config["IMAGE_UPLOADS"] = "/tmp/"  
 path = os.getcwd()
 
 ####################################
@@ -31,13 +31,17 @@ def upload_image():
                 image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
                 print("image saved")
                 message = "File(s) successfully loaded"
+                image.seek(0)
+                image_string = base64.b64encode(image.read())
+
+                image_string = image_string.decode('utf-8')
             # return redirect(request.url)
             # image = request.files('image')
             # print(image.filename)
             # image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
             # print("image saved")
             # return redirect(request.url)
-    return render_template("index.html", message=message)
+    return render_template("index.html", message=message, img = image_string)
 
 if __name__ == "__main__":
     app.run(debug=True)
