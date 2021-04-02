@@ -44,6 +44,11 @@ def upload_image():
                 duplicates = len(file_info[1])
     return render_template("home.html", message=message, total_files=total_files, unique_files=unique_files, duplicates=duplicates) 
 
+@app.route('/index')
+def travelMAp():
+    return render_template('index.html')
+
+
 @app.route("/getSimilarPhotos")
 def similarPhotos():
     get_image_feature_vectors()
