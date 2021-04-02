@@ -27,7 +27,7 @@ header {
     width: 100%;
     min-height: auto;
     text-align: center;
-    color: #fff;
+    color: rgb(12, 12, 12);
     background-image: url('../images/image100.jpg');
     background-position: center;
     -webkit-background-size: cover;
@@ -54,7 +54,7 @@ header .header-content .header-content-inner p {
     margin-bottom: 50px;
     font-size: 16px;
     font-weight: 300;
-    color: rgba(255,255,255,.7);
+    color: rgba(7, 7, 7, 0.7);
 }
 
 @media(min-width:768px) {
@@ -95,7 +95,7 @@ header .header-content .header-content-inner p {
 }
 
 .intro {
-	color: #fff;
+	color: rgb(10, 10, 10);
     background-color: yellowgreen;
     padding: 70px 0;
     text-align: center;
@@ -106,7 +106,7 @@ header .header-content .header-content-inner p {
 }
 
 .content-2 {
-	color: #fff;
+	color: rgb(15, 15, 15);
     background-color: #222;
 }
 
@@ -121,7 +121,7 @@ header .header-content .header-content-inner p {
 .promo a:visited,
 .promo a:hover,
 .promo a:active {
-    color: white;
+    color: rgb(19, 18, 18);
 	text-shadow: 0px 0px 40px black;
     text-decoration: none;
 }
@@ -145,15 +145,15 @@ header .header-content .header-content-inner p {
 }
 
 .item-1 {
-	background: url('../images/writing.jpg');
+	background: url('../images/');
 	}
 	
 .item-2 {
-	background: url('../images/concert.jpg');
+	background: url('../images/');
 	}
 	
 .item-3 {
-	background: url('../images/pencil_sharpener.jpg');
+	background: url('../images/');
 	}
 		
 .item-1,
@@ -170,7 +170,7 @@ header .header-content .header-content-inner p {
 .page-footer .contact {
 	padding: 100px 0;
 	background-color: yellowgreen;
-	color: #fff;
+	color: rgb(7, 7, 7);
 	}
 
 .page-footer .contact p {
@@ -190,12 +190,12 @@ header .header-content .header-content-inner p {
 	}
 
 .text-light {
-    color: rgba(255,255,255,.7);
+    color: rgba(7, 7, 7, 0.7);
 }
 
 .navbar-default {
     border-color: rgba(34,34,34,.05);
-    background-color: #fff;
+    background-color: rgb(10, 10, 10);
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
@@ -238,18 +238,18 @@ header .header-content .header-content-inner p {
     }
 
     .navbar-default .navbar-header .navbar-brand {
-        color: rgba(255,255,255,.7);
+        color: rgba(5, 5, 5, 0.7);
         letter-spacing: 0.5em;
     }
 
     .navbar-default .navbar-header .navbar-brand:hover,
     .navbar-default .navbar-header .navbar-brand:focus {
-        color: #fff;
+        color: rgb(15, 15, 15);
     }
 
     .navbar-default .nav > li>a,
     .navbar-default .nav>li>a:focus {
-        color: rgba(255,255,255,.7);
+        color: rgba(17, 16, 16, 0.7);
     }
 
     .navbar-default .nav > li>a:hover,
