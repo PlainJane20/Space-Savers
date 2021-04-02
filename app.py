@@ -46,7 +46,7 @@ def upload_image():
 
 @app.route('/travelMap')
 def travelMAp():
-    return render_template('travelMap')
+    return render_template('travelMap.html')
 
 @app.route('/about')
 def aboutUS():
