@@ -207,7 +207,7 @@ header .header-content .header-content-inner p {
 
 .navbar-default .navbar-header .navbar-brand:hover,
 .navbar-default .navbar-header .navbar-brand:focus {
-    color: #eb3812;
+    color: hsl(313, 38%, 64%);;
 }
 
 .navbar-default .nav > li>a,
@@ -270,7 +270,7 @@ header .header-content .header-content-inner p {
 
     .navbar-default.affix .navbar-header .navbar-brand:hover,
     .navbar-default.affix .navbar-header .navbar-brand:focus {
-        color: #eb3812;
+        color: hsl(313, 38%, 64%);
     }
 
     .navbar-default.affix .nav > li>a,
@@ -280,7 +280,7 @@ header .header-content .header-content-inner p {
 
     .navbar-default.affix .nav > li>a:hover,
     .navbar-default.affix .nav>li>a:focus:hover {
-        color: yellowgreen;
+        color: hsl(184, 135, 169);
     }
 }
 
