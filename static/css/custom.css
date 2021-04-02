@@ -423,7 +423,7 @@ img::-moz-selection {
 }
 
 .text-primary {
-    color: yehsl(313, 38%, 64%)llowgreen;
+    color: hsl(313, 38%, 64%);
 }
 
 .bg-primary {
