@@ -42,7 +42,7 @@ def upload_image():
                 total_files = len(file_info[0]) + len(file_info[1])
                 unique_files = len(file_info[0])
                 duplicates = len(file_info[1])
-    return render_template("home.html", message=message, total_files=total_files, unique_files=unique_files, duplicates=duplicates) 
+    return render_template("index.html", message=message, total_files=total_files, unique_files=unique_files, duplicates=duplicates) 
 
 @app.route('/travelMap')
 def travelMAp():
