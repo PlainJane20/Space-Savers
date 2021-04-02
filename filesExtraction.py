@@ -102,4 +102,4 @@ def getUserpath(path_to_folder):
         json.dump(getFileInfo(path_to_folder), out)
 
 
-getUserpath("/Users/lana/Desktop/PhotoForProject/jpg")
+# getUserpath("/Users/lana/Desktop/PhotoForProject/jpg")

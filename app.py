@@ -14,6 +14,7 @@ app.config["IMAGE_UPLOADS"] = "/tmp/"
 
 from findNeighbors import *
 from imagePreparation import *
+from filesExtraction import *
 path = os.getcwd()
 # annoy==1.17.0
 
@@ -38,6 +39,7 @@ def upload_image():
                 image.save(os.path.join('static/img/Uploads/', image.filename))
                 print("image saved")
                 message = "Files summary information"
+        getUserpath("static/img/Uploads/")
         file_info = similarPhotos()
         total_files = len(file_info[0]) + len(file_info[1])
         unique_files = len(file_info[0])
