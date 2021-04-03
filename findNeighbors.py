@@ -3,6 +3,7 @@ import time
 import glob 
 import os
 import json
+from config import *
 
 from annoy import AnnoyIndex
 from scipy import spatial
@@ -36,7 +37,7 @@ def cluster():
     n_nearest_neighbors = 20
     trees = 10000
 
-    all_feature_vectors = glob.glob('static/img/img_vectors/*.npz')
+    all_feature_vectors = glob.glob('/img_vectors/*.npz')
 
     t = AnnoyIndex(dims, metric='angular')
 
@@ -59,7 +60,7 @@ def cluster():
     print("Step.1 ANNOY INDEX generation -Finished")
     print("Step.2 - Similarity score calculation - Started")
 
-    # named_nearest_neighbors = []
+    
     similar_files = {}
 
     for i in file_index_to_file_name.keys():
@@ -96,8 +97,8 @@ def cluster():
         print(f"END: MASTER FILE is {master_file_name}, SIMILAR FILE: {similar_files}")
         print("Step.2 - Similarity score calculation - Finished")
 
-    with open('static/json/similarPhoto.json', 'w') as out:
+    with open(dir_config+'similarPhoto.json', 'w') as out:
         json.dump(similar_files, out)
-    print("Step.3 - Data stored in similar_files.json file")
-
+    print("Step.3 - Data stored in similarPhoto.json file")
     return similar_files
+    
