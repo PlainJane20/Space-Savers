@@ -1,1 +1,4 @@
-dir_config = "work"
+
+
+app.config["IMAGE_UPLOADS"] = "img/Uploads"
+
