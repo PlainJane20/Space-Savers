@@ -1,4 +1,4 @@
 
 
-app.config["IMAGE_UPLOADS"] = "img/Uploads"
+# app.config["IMAGE_UPLOADS"] = "img/Uploads"
 
