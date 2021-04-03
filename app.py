@@ -8,8 +8,8 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-#app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
-app.config["IMAGE_UPLOADS"] = "/tmp/"
+# app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
+# app.config["IMAGE_UPLOADS"] = "/tmp/"
 
 
 from findNeighbors import *
@@ -35,14 +35,14 @@ def upload_image():
             for image in files:
                 print(image.filename)
                 mydir = os.path.dirname(__file__)
-                image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+                image.save(os.path.join('static/img/uploads/', image.filename))
                 # image.save(os.path.join("upload", image.filename))
                 print("image saved")
-                message = "Number of Total Files: Number of Unique Files: Number of Duplicate Files"
-                file_info = similarPhotos()
-                total_files = len(file_info[0]) + len(file_info[1])
-                unique_files = len(file_info[0])
-                duplicates = len(file_info[1])
+                message = "You have: "
+    file_info = similarPhotos()
+    total_files = len(file_info[0]) + len(file_info[1])
+    unique_files = len(file_info[0])
+    duplicates = len(file_info[1])
     return render_template("index.html", message=message, total_files=total_files, unique_files=unique_files, duplicates=duplicates) 
 
 @app.route('/travelMap')

@@ -1,4 +1,9 @@
 *test*
+.vscode
+__pycache__
+__init__
+.DS_Store
+.ipynb_checkpoints
 
 
 

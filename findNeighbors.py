@@ -37,7 +37,7 @@ def cluster():
     n_nearest_neighbors = 20
     trees = 10000
 
-    all_feature_vectors = glob.glob('/img_vectors/*.npz')
+    all_feature_vectors = glob.glob('static/img/img_vectors/*.npz')
 
     t = AnnoyIndex(dims, metric='angular')
 
@@ -97,7 +97,7 @@ def cluster():
         print(f"END: MASTER FILE is {master_file_name}, SIMILAR FILE: {similar_files}")
         print("Step.2 - Similarity score calculation - Finished")
 
-    with open(dir_config+'similarPhoto.json', 'w') as out:
+    with open("static/json/similarPhoto.json", 'w') as out:
         json.dump(similar_files, out)
     print("Step.3 - Data stored in similarPhoto.json file")
     return similar_files

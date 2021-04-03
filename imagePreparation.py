@@ -25,14 +25,14 @@ def get_image_feature_vectors():
     module_handle = "https://tfhub.dev/google/imagenet/mobilenet_v2_140_224/feature_vector/4"
     module = hub.load(module_handle)
 
-    for filename in glob.glob(dir_config+'/tmp/*'):
+    for filename in glob.glob('static/img/Uploads/*'):
         if ".json" not in filename:
             print(filename)
             img = load_img(filename)
             features = module(img)
             feature_set = np.squeeze(features)
             outfile_name = os.path.basename(filename) + ".npz"
-            out_path = os.path.join('/img_vectors/', outfile_name)
+            out_path = os.path.join('static/img/img_vectors/', outfile_name)
             np.savetxt(out_path, feature_set, delimiter=',')
 
 
