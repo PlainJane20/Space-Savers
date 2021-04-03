@@ -134,7 +134,7 @@ header .header-content .header-content-inner p {
 
 .promo-item:hover {
     background-size: 110%; 
-    border: 10px solid rgba(255,255,255,0.3);
+    border: 10px solid rgb(243, 234, 234);
     line-height: 160px;
 }
 
