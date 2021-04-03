@@ -34,8 +34,8 @@ def upload_image():
             files = request.files.getlist("image[]")
             for image in files:
                 print(image.filename)
-                mydir = os.path.dirname(__file__)
-                image.save(os.path.join('static/img/uploads/', image.filename))
+                mydir = os.path.dirname('static/img/uploads/')
+                image.save(os.path.join(mydir, image.filename))
                 # image.save(os.path.join("upload", image.filename))
                 print("image saved")
                 message = "You have: "
