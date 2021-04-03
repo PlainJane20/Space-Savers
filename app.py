@@ -11,7 +11,6 @@ app = Flask(__name__)
 #app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
 app.config["IMAGE_UPLOADS"] = "/tmp/"
 
-
 from findNeighbors import *
 from imagePreparation import *
 path = os.getcwd()
@@ -51,7 +50,6 @@ def travelMAp():
 @app.route('/about')
 def aboutUS():
     return render_template("aboutus.html")
-
 
 @app.route("/getSimilarPhotos")
 def similarPhotos():
