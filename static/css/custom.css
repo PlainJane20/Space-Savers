@@ -429,3 +429,8 @@ img::-moz-selection {
 .bg-primary {
     background-color: hsl(313, 38%, 64%);
 }
+
+.img-container {
+    text-align: center;
+    margin-top:50px;
+}

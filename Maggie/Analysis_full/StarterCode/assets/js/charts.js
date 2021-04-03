@@ -1,9 +1,27 @@
 console.log("Hello CHART")
-var originals = [];
-dublicated = [];
-text = "Maggie. is great";
-    if(text.includes("Maggie.")) console.log("We found Maggie");
-    d3.json("similarPhoto.json").then(data => {
+var g = svg.append("g")
+                   .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        var color = d3.scaleOrdinal(['#4daf4a','#377eb8','#ff7f00','#984ea3','#e41a1c']);
+
+        var pie = d3.pie().value(function(d) { 
+                return d.percent; 
+            });
+
+        var path = d3.arc()
+                     .outerRadius(radius - 10)
+                     .innerRadius(0);
+
+        var label = d3.arc()
+                      .outerRadius(radius)
+                      .innerRadius(radius - 80);
+// d3.select("body").on("load", function(){
+    var originals = [];
+    dublicated = [];
+    text = "Maggie. is great";
+        if(text.includes("Maggie.")) console.log("We found Maggie");
+    
+    d3.json("static/json/similarPhoto.json").then(data => {
         Object.entries(data).forEach(([k,v]) => {
             originals.push(k);
             dublicated = dublicated.concat(v);
@@ -20,7 +38,7 @@ text = "Maggie. is great";
         var dublicatedImages = []
         var total_size_of_originals=0;
         var total_size_of_dublicates=0;
-        d3.json("Maggie/Analysis_full/StarterCode/assets/js/filesInfo.json").then(function(data) {
+        d3.json("static/json/filesInfo.json").then(function(data) {
             console.log(data)
             var total_size_of_all_files = 0;
             data.forEach((d) => {
@@ -47,50 +65,41 @@ text = "Maggie. is great";
               total_size_dup_mega = (Math.round (total_size_of_dublicates/1000000));
               var data = [total_size_mega, total_size_dup_mega]
               var r = 300; 
-      
-              var color = d3.scaleOrdinal().domain(data)
-                  .range(["pink", "yellow"]);
-      
-              var canvas = d3
-                  .select ("body")
-                  .append("svg")
-                  .attr("width", 1500)
-                  .attr("height", 1500); 
-      
-              var group = canvas.append("g")
-                  .attr("transform", "translate(300, 300)"); 
-      
-              var arc = d3.arc()
-                  .innerRadius(200)
-                  .outerRadius(r);
-    
-      
-              var pie = d3.pie()
-                  .value(function (d) { return d; });
-              
-              var arcs = group.selectAll (".arc")
-                  .data(pie(data))
-                  .enter()
-                  .append("g")
-                  .attr("class", "arc");
-      
-              arcs.append("path")
-                  .attr("d",arc)
-                  .attr("fill", function (d) {return color(d.data); }); 
-      
-              arcs.append("text")
-                  .attr("transform", function (d) { return "translate(" + arc.centroid(d) + ")"; })
-                  .attr("text-anchor", "middle")
-                  .attr("font-family", "fantasy")
-                  .attr("font-size", "1.9 em")
-                  .text(function (d) { return d.data; }); 
+
+              var svg = d3.select("svg"),
+            width = svg.attr("width"),
+            height = svg.attr("height"),
+            radius = Math.min(width, height) / 2;
         
-           
-            console.log("Original Sizes:", total_size_of_originals);
-            console.log("Dublicates Sizes:", total_size_of_dublicates);
+        
+
+        
+            var arc = g.selectAll(".arc")
+                       .data(pie(data))
+                       .enter().append("g")
+                       .attr("class", "arc");
+
+            arc.append("path")
+               .attr("d", path)
+               .attr("fill",  'yellow');
+        
+            console.log(arc)
+        
+            arc.append("text")
+               .attr("transform", function(d) { 
+                        return "translate(" + label.centroid(d) + ")"; 
+                })
+               .text(function(d) { return d.data.browser; });
+            });
+
+            svg.append("g")
+               .attr("transform", "translate(" + (width / 2 - 120) + "," + 20 + ")")
+               .append("text")
+               .text("Browser use statistics - Jan 2017")
+               .attr("class", "title")
         });
         // originalSizes = dublicatedImages.map(d=>d.file_bytes_size)
     });
 
-  
+// })
         

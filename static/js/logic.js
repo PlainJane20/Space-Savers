@@ -17,7 +17,8 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 
 // read JSON file
-var url = "static/js/filesInfo.json";
+// var url = "static/js/filesInfo.json";
+var url = "static/json/filesInfo.json"
 console.log(url);
 
 d3.json(url, function(response) {

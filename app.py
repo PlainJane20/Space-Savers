@@ -53,6 +53,10 @@ def travelMAp():
 def aboutUS():
     return render_template("aboutus.html")
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template("dashboard.html")
+
 
 @app.route("/getSimilarPhotos")
 def similarPhotos():
