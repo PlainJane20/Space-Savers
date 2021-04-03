@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		<style type="text/css">
+  			.chart-gauge
+			{
+			  width: 400px;
+			  margin: 100px auto  
+			 } 
+			.chart-filled
+			{
+				fill: rgb(99, 197, 176);
+			}
+			.chart-empty
+			{
+				fill: #dedede;
+			}
+		
+			.needle, .needle-center
+			{
+				fill: #464A4F;
+			}
+
+			svg {
+			  font: 10px sans-serif;
+			}
+
+		</style>
+
+	</head>
+	<body>
+
+		<div class="chart-gauge"></div>
+		<script type="text/javascript" src="d3_gauge.js"></script>
+		<script type="text/javascript">
+			setInterval(function(){
+				needle.moveTo(Math.random());
+			}, 5000);
+		</script>
+	</body>
+
+</html>
