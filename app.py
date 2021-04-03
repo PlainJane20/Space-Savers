@@ -11,6 +11,7 @@ app = Flask(__name__)
 #app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
 app.config["IMAGE_UPLOADS"] = "/tmp/"
 
+
 from findNeighbors import *
 from imagePreparation import *
 path = os.getcwd()
@@ -35,6 +36,7 @@ def upload_image():
                 print(image.filename)
                 mydir = os.path.dirname(__file__)
                 image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+                # image.save(os.path.join("upload", image.filename))
                 print("image saved")
                 message = "Number of Total Files: Number of Unique Files: Number of Duplicate Files"
                 file_info = similarPhotos()
@@ -50,6 +52,7 @@ def travelMAp():
 @app.route('/about')
 def aboutUS():
     return render_template("aboutus.html")
+
 
 @app.route("/getSimilarPhotos")
 def similarPhotos():
