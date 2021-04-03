@@ -15,7 +15,9 @@ body {
     font-family: 'Lato', sans-serif;
     color: #454545;
     font-weight: 300;
-    background: #ffffff;
+    background-image: url('../images/abusbg.jpg');
+    background-position: center;
+    background-size: cover;
 }
 
 a {
@@ -152,11 +154,11 @@ img {
     width: 50px;
     height: 5px;
     left: calc(50% - 25px);
-    background: #353535;
+    background: #ffffff;
 }
 
 .section-title h1 {
-    color: #353535;
+    color: #ffffff;
     font-size: 50px;
     letter-spacing: 5px;
     margin-bottom: 5px;
