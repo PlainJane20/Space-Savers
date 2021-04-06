@@ -14,6 +14,7 @@ app = Flask(__name__)
 
 from findNeighbors import *
 from imagePreparation import *
+from filesExtraction import *
 path = os.getcwd()
 # annoy==1.17.0
 
@@ -70,6 +71,33 @@ def similarPhotos():
     print(unique_files)
     print(duplicates)
     return [unique_files, duplicates]
+
+@app.route("/getDuplicateSize")
+def getDuplicateSize():
+    similar_photos = similarPhotos()
+    photo_info = getFileInfo('static/img/uploads/')
+
+    size_of_duplicates_files = 0
+
+    for key in similar_photos.keys():      
+        for i in range(len(photo_info)):        
+            for file in similar_photos[key]:
+                list_of_duplicates = photo_info[i]['file_id'].split(".")[0]
+                if file in list_of_duplicates:
+                    size_of_duplicates_files += photo_info[i]['file_bytes_size']
+    return size_of_duplicates_files
+
+@app.route("/getUniqueSize")
+def getUniqueSize():
+    similar_photos = similarPhotos()
+    photo_info = getFileInfo('static/img/uploads/')
+    size_of_unique_files = 0
+    for key in similar_photos.keys():      
+        for i in range(len(photo_info)):        
+            file = photo_info[i]['file_id'].split(".")[0]
+            if key == file:
+                size_of_unique_files += photo_info[i]['file_bytes_size']
+    return size_of_unique_files
 
 if __name__ == "__main__":
     app.run(debug=True)
