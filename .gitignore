@@ -1,7 +1,7 @@
 *test*
 .vscode
 __pycache__
-__init__
+__init__.py
 .DS_Store
 .ipynb_checkpoints
 
