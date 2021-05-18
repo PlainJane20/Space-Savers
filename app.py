@@ -4,7 +4,8 @@
 import os
 from flask import Flask, request, redirect, url_for, render_template, jsonify, make_response
 from datetime import datetime
-from werkzeug.utils import secure_filename
+from werkzeug.utils import *
+# secure_filename
 
 app = Flask(__name__)
 
@@ -22,29 +23,51 @@ path = os.getcwd()
 # Flask Routes
 ####################################
 
-@app.route("/", methods=["GET", "POST"])
-def upload_image():
-    message = ""
-    total_files =0
-    unique_files =0
-    duplicates =0
+# render for index.html 
+@app.route("/")
+def index_html():
+    print("page was loaded")
+    return render_template("index.html")
+
+@app.route("/", methods=["POST"])
+def file_extraction():
     if request.method == "POST":
-        files = request.files.getlist("image[]")
-        print(files)
-        if request.files:
-            files = request.files.getlist("image[]")
-            for image in files:
-                print(image.filename)
-                mydir = os.path.dirname('static/img/uploads/')
-                image.save(os.path.join(mydir, image.filename))
-                # image.save(os.path.join("upload", image.filename))
-                print("image saved")
-                message = "You have: "
-    file_info = similarPhotos()
-    total_files = len(file_info[0]) + len(file_info[1])
-    unique_files = len(file_info[0])
-    duplicates = len(file_info[1])
-    return render_template("index.html", message=message, total_files=total_files, unique_files=unique_files, duplicates=duplicates) 
+        files = request.files.getlist("image_uploads")
+        for file in files:
+            # print(file)
+            # tags = exifread.process_file(file)            
+            # print(tags)
+            print(getExif(file))
+
+        # print(files)
+    return redirect(url_for('index_html'))
+
+# @app.route("/", methods=["GET", "POST"])
+# def upload_image():
+#     message = ""
+#     total_files = 0
+#     unique_files = 0
+#     duplicates = 0
+#     if request.method == "POST":
+#         files = request.files.getlist("image_uploads")
+#         print(files)
+#         if request.files:
+#             files = request.files.getlist("image_uploads")
+#             for image in files:
+#                 print(image.filename)
+#                 fileExif = exifread.process_file(image)
+#                 print(fileExif)
+#                 # mydir = os.path.dirname('static/img/uploads/')
+#                 # image.save(os.path.join(mydir, image.filename))
+#                 # image.save(os.path.join("upload", image.filename))
+#                 # print("image saved")
+#                 # message = "You have: "
+#     # file_info = similarPhotos()
+#     # total_files = len(file_info[0]) + len(file_info[1])
+#     # unique_files = len(file_info[0])
+#     # duplicates = len(file_info[1])
+#     return render_template("index.html")
+#     # , message=message, total_files=total_files, unique_files=unique_files, duplicates=duplicates) 
 
 @app.route('/travelMap')
 def travelMAp():

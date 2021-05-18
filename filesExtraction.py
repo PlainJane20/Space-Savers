@@ -32,6 +32,54 @@ def getDecimalLatLong(lat, longt):
 
     return [latitude, longtitude]  
     
+def getExif(file):
+    fileExif = []
+
+    date  = ''
+    time = ''
+    madeBy = ''
+    model = ''
+    lens = ''
+    lat_ref = ''
+    long_ref = ''
+    coordinates = []
+
+    try:
+        tags = exifread.process_file(file)
+        for tag in tags.keys():
+            if tag == 'Image Make': madeBy = str(tags[tag])
+            if tag =='Image Model': model = str(tags[tag])
+            if tag =='EXIF DateTimeOriginal': 
+                date_and_time = str(tags[tag]).split(' ')
+                date = date_and_time[0]
+                time = date_and_time[1]
+
+            if tag =='MakerNote LensModel': lens = str(tags[tag])
+            # if tag == "GPS GPSLatitudeRef": lat_ref = str(tags[tag])
+
+            # if tag == "GPS GPSLatitude":
+            #     lat = tags[tag].values
+            #     coordinates.append(lat) 
+
+            # if tag == "GPS GPSLongitudeRef": long_ref = str(tags[tag])
+            # if tag == "GPS GPSLongitude":
+            #     longt = tags[tag].values
+            #     coordinates.append(longt)
+                        
+            # decimal_coordinates = []   
+            # if len(coordinates) != 0:
+            #     decimal_coordinates = getDecimalLatLong(coordinates[0], coordinates[1])
+            # if lat_ref != 'N': decimal_coordinates[0] = float(f'-{decimal_coordinates[0]}')
+            # if long_ref != 'E': decimal_coordinates[1] = float(f'-{decimal_coordinates[1]}')
+
+            fileExif.append({"file_id": file
+                                , "Date": date, "Time": time, "lensType": lens
+                                , 'madeBy': madeBy, 'model': model})
+            return fileExif
+    except FileNotFoundError:
+        return "Folder not found"
+
+
 def getFileInfo(path_to_folder):
     # get the list of files in given directory
     
