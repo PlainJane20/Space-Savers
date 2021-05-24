@@ -2,7 +2,8 @@
 # Flask Setup
 ####################################
 import os
-from flask import Flask, request, redirect, url_for, render_template, jsonify, make_response
+import imghdr
+from flask import Flask, request, redirect, url_for, render_template, abort, jsonify, make_response
 from datetime import datetime
 from werkzeug.utils import *
 # secure_filename
@@ -12,12 +13,62 @@ app = Flask(__name__)
 # app.config["IMAGE_UPLOADS"] = "static/img/uploads/"
 # app.config["IMAGE_UPLOADS"] = "/tmp/"
 
+app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.JPG', '.jpeg', '.JPEG']
 
 from findNeighbors import *
 from imagePreparation import *
 from filesExtraction import *
 path = os.getcwd()
 # annoy==1.17.0
+
+def validate_image(stream):
+    header = stream.read(512)
+    stream.seek(0)
+    format = imghdr.what(None, header)
+    print('VALIDATE IMAGE', format)
+    if not format:
+        return None
+    return '.' + (format if format != 'jpeg' else 'jpg' )
+    
+def fileExif():
+    # dictionary for all exif info from given files
+    filesExif = []
+
+    if request.method == "POST":
+        files = request.files.getlist("image_uploads")
+        for file in files:
+            # fileExif = []
+            fileID = secure_filename(file.filename)
+            if fileID != '':
+                fileExt = os.path.splitext(fileID)[1]
+                if fileExt not in app.config['UPLOAD_EXTENSIONS'] or fileExt != validate_image(file.stream):
+                    abort(400, "File Extension doesn't supported yet")
+
+            
+            fileSize = len(file.stream.read())
+            madeBy = ''
+            model = ''
+            date = 0
+            time = 0
+            lens = ''
+
+            tags = exifread.process_file(file)
+            for tag in tags:
+                if tag == 'Image Make': madeBy = str(tags[tag])
+                if tag =='Image Model': model = str(tags[tag])
+                if tag =='EXIF DateTimeOriginal':
+                    date_and_time = str(tags[tag]).split(' ')
+                    date = date_and_time[0]
+                    time = date_and_time[1]
+
+                if tag =='MakerNote LensModel': lens = str(tags[tag])
+
+            filesExif.append({'fileID': fileID, 'fileSize': fileSize, 'Image Make': madeBy, 'Image Model': model
+                                , 'Image Date': date, 'Image Time': time, 'Lens': lens})
+            # save file to current directory
+            # file.save(file.filename)
+    print(filesExif)
+    return jsonify(filesExif)
 
 ####################################
 # Flask Routes
@@ -31,43 +82,49 @@ def index_html():
 
 @app.route("/", methods=["POST"])
 def file_extraction():
-    if request.method == "POST":
-        files = request.files.getlist("image_uploads")
-        for file in files:
-            # print(file)
-            # tags = exifread.process_file(file)            
-            # print(tags)
-            print(getExif(file))
 
-        # print(files)
+    # # dictionary for all exif info from given files
+    # filesExif = []
+
+    if request.method == "POST":
+        fileExif()
+    #     files = request.files.getlist("image_uploads")
+    #     for file in files:
+    #         # fileExif = []
+    #         fileID = secure_filename(file.filename)
+    #         if fileID != '':
+    #             fileExt = os.path.splitext(fileID)[1]
+    #             if fileExt not in app.config['UPLOAD_EXTENSIONS'] or fileExt != validate_image(file.stream):
+    #                 abort(400, "File Extension doesn't supported yet")
+
+            
+    #         fileSize = len(file.stream.read())
+    #         madeBy = ''
+    #         model = ''
+    #         date = 0
+    #         time = 0
+    #         lens = ''
+
+    #         tags = exifread.process_file(file)
+    #         for tag in tags:
+    #             if tag == 'Image Make': madeBy = str(tags[tag])
+    #             if tag =='Image Model': model = str(tags[tag])
+    #             if tag =='EXIF DateTimeOriginal':
+    #                 date_and_time = str(tags[tag]).split(' ')
+    #                 date = date_and_time[0]
+    #                 time = date_and_time[1]
+
+    #             if tag =='MakerNote LensModel': lens = str(tags[tag])
+
+    #         filesExif.append({'fileID': fileID, 'fileSize': fileSize, 'Image Make': madeBy, 'Image Model': model
+    #                             , 'Image Date': date, 'Image Time': time, 'Lens': lens})
+    #         # save file to current directory
+    #         # file.save(file.filename)
+    #     print(filesExif)
+            
     return redirect(url_for('index_html'))
 
-# @app.route("/", methods=["GET", "POST"])
-# def upload_image():
-#     message = ""
-#     total_files = 0
-#     unique_files = 0
-#     duplicates = 0
-#     if request.method == "POST":
-#         files = request.files.getlist("image_uploads")
-#         print(files)
-#         if request.files:
-#             files = request.files.getlist("image_uploads")
-#             for image in files:
-#                 print(image.filename)
-#                 fileExif = exifread.process_file(image)
-#                 print(fileExif)
-#                 # mydir = os.path.dirname('static/img/uploads/')
-#                 # image.save(os.path.join(mydir, image.filename))
-#                 # image.save(os.path.join("upload", image.filename))
-#                 # print("image saved")
-#                 # message = "You have: "
-#     # file_info = similarPhotos()
-#     # total_files = len(file_info[0]) + len(file_info[1])
-#     # unique_files = len(file_info[0])
-#     # duplicates = len(file_info[1])
-#     return render_template("index.html")
-#     # , message=message, total_files=total_files, unique_files=unique_files, duplicates=duplicates) 
+
 
 @app.route('/travelMap')
 def travelMAp():
