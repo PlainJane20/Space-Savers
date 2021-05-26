@@ -6,7 +6,16 @@ import imghdr
 from flask import Flask, request, redirect, url_for, render_template, abort, jsonify, make_response
 from datetime import datetime
 from werkzeug.utils import *
-# secure_filename
+
+import PIL
+import PIL.Image
+from io import BytesIO
+import tensorflow as tf
+import tensorflow_hub as hub
+import numpy as np 
+
+os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
+
 
 app = Flask(__name__)
 
@@ -36,8 +45,8 @@ def fileExif():
 
     if request.method == "POST":
         files = request.files.getlist("image_uploads")
+        
         for file in files:
-            # fileExif = []
             fileID = secure_filename(file.filename)
             if fileID != '':
                 fileExt = os.path.splitext(fileID)[1]
@@ -53,6 +62,7 @@ def fileExif():
             lens = ''
 
             tags = exifread.process_file(file)
+            print("Tags were gotten")
             for tag in tags:
                 if tag == 'Image Make': madeBy = str(tags[tag])
                 if tag =='Image Model': model = str(tags[tag])
@@ -62,13 +72,42 @@ def fileExif():
                     time = date_and_time[1]
 
                 if tag =='MakerNote LensModel': lens = str(tags[tag])
+            print('LOOP TAG ended')
 
             filesExif.append({'fileID': fileID, 'fileSize': fileSize, 'Image Make': madeBy, 'Image Model': model
                                 , 'Image Date': date, 'Image Time': time, 'Lens': lens})
-            # save file to current directory
-            # file.save(file.filename)
-    print(filesExif)
-    return jsonify(filesExif)
+    
+    return filesExif
+
+def imgPreparation(file):
+    # Prepare image to convert it to image vector           
+    img = PIL.Image.open(file)
+    img = np.array(img)
+    img = tf.image.resize_with_pad(img, 224, 224)
+    img = tf.image.convert_image_dtype(img, tf.float32)[tf.newaxis, ...]
+    print('img is ready')
+    # create image vectors
+    module_handle = "https://tfhub.dev/google/imagenet/mobilenet_v2_140_224/feature_vector/5"
+    print("MODEL TO HANDLE", module_handle)
+    # module = hub.load(module_handle)
+    module = hub.load(module_handle)
+
+    print("MODULE is loaded")
+    features = module(img)
+    print("FEATIRES", features)
+    feature_set = np.squeeze(features)
+    print('VECTOR', feature_set)
+
+    return feature_set
+
+
+def saveExifDataToJson(list, file_name):
+    file_path = f'static/json/{file_name}.json'
+    if os.path.exists(file_path):
+        os.remove(file_path)
+    
+    with open(file_path, 'w') as out:
+        json.dump(list, out)
 
 ####################################
 # Flask Routes
@@ -81,47 +120,12 @@ def index_html():
     return render_template("index.html")
 
 @app.route("/", methods=["POST"])
-def file_extraction():
-
-    # # dictionary for all exif info from given files
-    # filesExif = []
+def file_choosing():
 
     if request.method == "POST":
-        fileExif()
-    #     files = request.files.getlist("image_uploads")
-    #     for file in files:
-    #         # fileExif = []
-    #         fileID = secure_filename(file.filename)
-    #         if fileID != '':
-    #             fileExt = os.path.splitext(fileID)[1]
-    #             if fileExt not in app.config['UPLOAD_EXTENSIONS'] or fileExt != validate_image(file.stream):
-    #                 abort(400, "File Extension doesn't supported yet")
-
-            
-    #         fileSize = len(file.stream.read())
-    #         madeBy = ''
-    #         model = ''
-    #         date = 0
-    #         time = 0
-    #         lens = ''
-
-    #         tags = exifread.process_file(file)
-    #         for tag in tags:
-    #             if tag == 'Image Make': madeBy = str(tags[tag])
-    #             if tag =='Image Model': model = str(tags[tag])
-    #             if tag =='EXIF DateTimeOriginal':
-    #                 date_and_time = str(tags[tag]).split(' ')
-    #                 date = date_and_time[0]
-    #                 time = date_and_time[1]
-
-    #             if tag =='MakerNote LensModel': lens = str(tags[tag])
-
-    #         filesExif.append({'fileID': fileID, 'fileSize': fileSize, 'Image Make': madeBy, 'Image Model': model
-    #                             , 'Image Date': date, 'Image Time': time, 'Lens': lens})
-    #         # save file to current directory
-    #         # file.save(file.filename)
-    #     print(filesExif)
-            
+        filesExif = fileExif()
+        userExifFile = 'userExifFile'
+        saveExifDataToJson(filesExif, userExifFile)
     return redirect(url_for('index_html'))
 
 
